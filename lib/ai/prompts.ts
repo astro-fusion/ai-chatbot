@@ -6,9 +6,10 @@ export const blocksPrompt = `
   This is a guide for using blocks tools: \`createDocument\` and \`updateDocument\`, which render content on a blocks beside the conversation.
 
   **When to use \`createDocument\`:**
-  - For substantial content (>10 lines)
+  - For substantial content (>10 lines) or code
   - For content users will likely save/reuse (emails, code, essays, etc.)
   - When explicitly requested to create a document
+  - For when content contains a single code snippet
 
   **When NOT to use \`createDocument\`:**
   - For informational/explanatory content

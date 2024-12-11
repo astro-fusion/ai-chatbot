@@ -122,8 +122,9 @@ export async function POST(request: Request) {
         description: 'Create a document for a writing activity',
         parameters: z.object({
           title: z.string(),
+          type: z.enum(['essay', 'code']),
         }),
-        execute: async ({ title }) => {
+        execute: async ({ title, type }) => {
           const id = generateUUID();
           let draftText = '';
 
@@ -145,7 +146,11 @@ export async function POST(request: Request) {
           const { fullStream } = streamText({
             model: customModel(model.apiIdentifier),
             system:
-              'Write about the given topic. Markdown is supported. Use headings wherever appropriate.',
+              type === 'essay'
+                ? 'Write about the given topic. Markdown is supported. Use headings wherever appropriate.'
+                : type === 'code'
+                  ? 'Write a python code snippet based on the given prompt.'
+                  : 'Invalid document type, please try again!',
             prompt: title,
           });
 
